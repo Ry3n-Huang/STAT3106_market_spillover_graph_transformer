@@ -1,0 +1,13 @@
+# Large data files (exceed GitHub 100MB limit)
+Data/qf0egyr4ffi0pszj.csv
+Data/ownership_13f.csv
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
