@@ -1,0 +1,176 @@
+/* Custom styles to complement Tailwind */
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+pre {
+  overflow-x: auto;
+}
+
+tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+a[class*="rounded-full"] {
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+a[class*="rounded-full"]:hover {
+  transform: translateY(-1px);
+}
+
+/* ── Architecture diagram ── */
+
+.arch-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  border-radius: 14px;
+  padding: 16px 20px;
+  text-align: center;
+  gap: 2px;
+}
+
+.arch-label-top {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 9px;
+  border-radius: 99px;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* Input node */
+.arch-input {
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+}
+.arch-input .arch-label-top {
+  background: #e2e8f0;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+/* LSTM encoder */
+.arch-lstm {
+  background: linear-gradient(150deg, #f0f4ff 0%, #e8eeff 100%);
+  border: 1.5px solid #a5b4fc;
+  box-shadow: 0 2px 10px rgba(99,102,241,0.10);
+}
+.arch-lstm .arch-label-top {
+  background: #e0e7ff;
+  color: #4338ca;
+  border: 1px solid #a5b4fc;
+}
+
+/* Baseline branch */
+.arch-baseline {
+  background: #f8fafc;
+  border: 1.5px dashed #cbd5e1;
+}
+.arch-baseline .arch-label-top {
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
+/* WIRE branch — highlighted */
+.arch-wire {
+  background: linear-gradient(150deg, #eff6ff 0%, #eef2ff 100%);
+  border: 2px solid #60a5fa;
+  box-shadow: 0 4px 18px rgba(59,130,246,0.14), inset 0 0 0 1px rgba(255,255,255,0.6);
+}
+.arch-wire .arch-label-top {
+  background: linear-gradient(135deg, #1d4ed8, #4f46e5);
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 6px rgba(29,78,216,0.30);
+}
+
+/* Step rows inside WIRE box */
+.arch-step-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 5px 8px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.65);
+  border: 1px solid rgba(147,197,253,0.35);
+}
+
+.arch-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 0.5px;
+}
+
+/* Divider inside node */
+.arch-divider {
+  width: 100%;
+  border-top: 1px solid #e2e8f0;
+  margin: 8px 0 6px;
+}
+
+/* Pills */
+.arch-pill {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* Parameter count chips at bottom */
+.arch-param-chip {
+  display: inline-block;
+  padding: 3px 11px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+/* ── Figure cards ── */
+
+.fig-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+}
+
+.fig-img {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+}
+
+.fig-caption {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.6;
+  text-align: center;
+}
