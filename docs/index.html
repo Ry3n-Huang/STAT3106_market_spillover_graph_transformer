@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Market Spillover via Graph Transformers & WIRE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="main.css" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 700: '#1e3a5f', 800: '#162d4a', 900: '#0f1f33' },
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans py-12 px-4">
+
+  <div class="flex flex-col items-center w-full max-w-[820px] mx-auto">
+
+    <!-- ── Title ── -->
+    <div class="text-center mb-3">
+      <p class="text-xs font-semibold tracking-widest uppercase text-blue-600 mb-2">STAT 3106 · Columbia University · March 2026</p>
+      <h1 class="text-4xl font-bold leading-tight mb-2">
+        Decoding Market Spillover via<br />
+        <span class="text-blue-700">Multi-Relational Graph Transformers</span>
+      </h1>
+      <p class="text-lg text-gray-600 mt-2">
+        <span class="italic">WIRE</span>: Wavelet-Induced Rotary Encodings for graph-topology-aware attention
+      </p>
+    </div>
+
+    <!-- ── Authors ── -->
+    <div class="flex gap-x-8 items-center justify-center mt-4 text-sm">
+      <span>
+        <a href="https://www.linkedin.com/in/weihanghuang1/" target="_blank" rel="noopener" class="font-semibold text-blue-700 hover:underline">Weihang Huang</a><sup>1</sup>
+      </span>
+      <span>
+        <a href="https://www.linkedin.com/in/astrid-teo-501856175/" target="_blank" rel="noopener" class="font-semibold text-blue-700 hover:underline">Astrid Teo</a><sup>1</sup>
+      </span>
+    </div>
+    <div class="flex gap-x-4 items-center justify-center mt-1 text-xs text-gray-500">
+      <span><sup>1</sup>Columbia University, Department of Statistics</span>
+    </div>
+
+    <!-- ── Resource Buttons ── -->
+    <div class="flex flex-wrap gap-3 justify-center mt-6">
+      <a href="https://github.com/Ry3n-Huang/STAT3106_market_spillover_graph_transformer"
+         class="flex gap-2 items-center justify-center rounded-full py-2 px-5 bg-gray-800 hover:bg-gray-900 text-white text-sm font-medium transition-colors">
+        <i class="fa-brands fa-github"></i> Code
+      </a>
+      <a href="../3106_proposal_v3_0 (1).pdf"
+         class="flex gap-2 items-center justify-center rounded-full py-2 px-5 bg-blue-700 hover:bg-blue-800 text-white text-sm font-medium transition-colors">
+        <i class="fa-regular fa-file-lines"></i> Proposal
+      </a>
+      <a href="https://nbviewer.org/github/Ry3n-Huang/STAT3106_market_spillover_graph_transformer/blob/main/prototype_v6.ipynb"
+         target="_blank" rel="noopener"
+         class="flex gap-2 items-center justify-center rounded-full py-2 px-5 bg-orange-600 hover:bg-orange-700 text-white text-sm font-medium transition-colors">
+        <i class="fa-solid fa-book-open"></i> Notebook (v6)
+      </a>
+      <a href="https://nbviewer.org/github/Ry3n-Huang/STAT3106_market_spillover_graph_transformer/blob/main/prototype_ablation.ipynb"
+         target="_blank" rel="noopener"
+         class="flex gap-2 items-center justify-center rounded-full py-2 px-5 bg-orange-600 hover:bg-orange-700 text-white text-sm font-medium transition-colors">
+        <i class="fa-solid fa-flask"></i> Notebook (Ablation)
+      </a>
+    </div>
+
+    <!-- ── Architecture Diagram ── -->
+    <div class="mt-10 w-full">
+      <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div class="bg-gradient-to-r from-slate-50 to-blue-50 border-b border-gray-100 px-6 py-3 flex items-center justify-between">
+          <p class="text-xs font-semibold tracking-widest uppercase text-slate-400">Architecture Overview</p>
+          <div class="flex gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-300"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-300"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-green-300"></span>
+          </div>
+        </div>
+
+        <div class="p-8 select-none" style="font-size:13px;">
+          <div class="flex flex-col items-center" style="gap:0;">
+
+            <!-- ① Input tensor -->
+            <div class="arch-node arch-input" style="min-width:260px;">
+              <span class="arch-label-top">Input Tensor</span>
+              <span class="font-mono font-bold text-slate-700 text-sm">(B,&thinsp;N=100,&thinsp;T=20,&thinsp;F=9)</span>
+              <span class="text-xs text-slate-400 mt-1">Batch · Stocks · Lookback · Features</span>
+            </div>
+
+            <!-- SVG connector: input → encoder -->
+            <svg width="20" height="32" viewBox="0 0 20 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="10" y1="0" x2="10" y2="26" stroke="#94a3b8" stroke-width="1.5"/>
+              <polygon points="4,22 16,22 10,30" fill="#94a3b8"/>
+            </svg>
+
+            <!-- ② LSTM Encoder -->
+            <div class="arch-node arch-lstm" style="width:340px;">
+              <span class="arch-label-top">Shared Encoder</span>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-lg">🔁</span>
+                <span class="font-bold text-indigo-900 text-sm">LSTM Encoder</span>
+              </div>
+              <span class="text-xs text-indigo-500">2-layer · hidden = 64 · dropout 0.2</span>
+              <div class="arch-divider border-indigo-100 mt-2"></div>
+              <span class="font-mono text-xs text-indigo-600">h&thinsp;∈&thinsp;ℝ<sup>B×N×64</sup></span>
+            </div>
+
+            <!-- SVG connector: encoder → fork -->
+            <svg width="560" height="56" viewBox="0 0 560 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;">
+              <!-- stem down from encoder -->
+              <line x1="280" y1="0" x2="280" y2="22" stroke="#94a3b8" stroke-width="1.5"/>
+              <!-- horizontal fork bar -->
+              <line x1="140" y1="22" x2="420" y2="22" stroke="#94a3b8" stroke-width="1.5"/>
+              <!-- left branch -->
+              <line x1="140" y1="22" x2="140" y2="50" stroke="#94a3b8" stroke-width="1.5"/>
+              <polygon points="134,46 146,46 140,54" fill="#94a3b8"/>
+              <!-- right branch (blue, highlighted) -->
+              <line x1="420" y1="22" x2="420" y2="50" stroke="#3b82f6" stroke-width="2"/>
+              <polygon points="414,46 426,46 420,54" fill="#3b82f6"/>
+            </svg>
+
+            <!-- ③ Two branches side by side -->
+            <div class="flex gap-5 items-start" style="width:560px;">
+
+              <!-- Left: Baseline -->
+              <div class="flex flex-col items-center" style="flex:1;">
+                <div class="arch-node arch-baseline w-full" style="min-height:80px;">
+                  <span class="arch-label-top">Baseline</span>
+                  <span class="font-bold text-slate-600 text-sm">Baseline LSTM</span>
+                  <div class="arch-divider mt-2"></div>
+                  <div class="flex flex-col items-center gap-1 text-xs text-slate-500">
+                    <span class="arch-pill bg-slate-100 text-slate-500">Linear projection</span>
+                    <span class="font-mono text-slate-400">ŷ → 5-day return</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: WIRE Graph Transformer -->
+              <div class="flex flex-col items-center" style="flex:1.6;">
+                <div class="arch-node arch-wire w-full">
+                  <span class="arch-label-top">★ Key Contribution</span>
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="text-base">🕸️</span>
+                    <span class="font-bold text-blue-900 text-sm">WIRE Graph Transformer</span>
+                  </div>
+                  <div class="flex flex-col gap-2 text-xs w-full">
+                    <div class="arch-step-row">
+                      <span class="arch-step-num" style="background:#dbeafe;color:#1d4ed8;">1</span>
+                      <div>
+                        <span class="text-slate-500">Laplacian eigendecomp</span>
+                        <span class="font-mono text-blue-600 ml-1">φ ∈ ℝ<sup>N×M</sup></span>
+                      </div>
+                    </div>
+                    <div class="arch-step-row">
+                      <span class="arch-step-num" style="background:#dbeafe;color:#1d4ed8;">2</span>
+                      <div>
+                        <span class="text-slate-500">Rotation angles</span>
+                        <span class="font-mono text-blue-600 ml-1">θ = ωᵀφ</span>
+                        <span class="arch-pill bg-amber-50 text-amber-700 ml-1" style="font-size:9px;">LR ×10</span>
+                      </div>
+                    </div>
+                    <div class="arch-step-row">
+                      <span class="arch-step-num" style="background:#dbeafe;color:#1d4ed8;">3</span>
+                      <span class="text-slate-500">Rotary Q/K · multi-head attention (4 heads)</span>
+                    </div>
+                    <div class="arch-step-row">
+                      <span class="arch-step-num" style="background:#dbeafe;color:#1d4ed8;">4</span>
+                      <span class="text-slate-500">Gated residual + FFN + LayerNorm ×2</span>
+                    </div>
+                  </div>
+                  <div class="arch-divider border-blue-100 mt-3"></div>
+                  <span class="font-mono text-xs text-blue-500">ŷ → 5-day return</span>
+                </div>
+              </div>
+
+            </div><!-- end branches -->
+
+            <!-- ④ Parameter counts -->
+            <div class="mt-5 flex flex-wrap gap-3 justify-center">
+              <span class="arch-param-chip bg-slate-50 border-slate-200 text-slate-500">LSTM encoder · ~54K params</span>
+              <span class="arch-param-chip bg-indigo-50 border-indigo-100 text-indigo-500">Graph Transformer · ~121K params</span>
+              <span class="arch-param-chip bg-blue-50 border-blue-200 text-blue-600">ω (WIRE only) · 512 params</span>
+            </div>
+
+          </div><!-- end flex col -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Abstract ── -->
+    <div class="mt-8 w-full">
+      <h2 class="font-bold text-lg mb-3 text-gray-900">Abstract</h2>
+      <p class="text-sm text-justify text-gray-700 leading-relaxed">
+        Financial markets exhibit complex structural dependencies. While recent advancements like the
+        <span class="font-semibold">Differential Graph Transformer (DGT)</span> effectively capture dynamic
+        price correlations, they often ignore fundamental business topologies, making them vulnerable to
+        spurious statistical noise. This project proposes a spatial-temporal framework that extends the DGT
+        architecture by injecting explicit structural relationships (e.g., Supply Chains, Sectors). By treating
+        the S&amp;P 500 as a fully-connected graph where multi-relational topologies are mathematically injected
+        via <span class="font-mono font-semibold text-blue-700">WIRE</span> (Wavelet-Induced Rotary Position
+        Encodings), our model aims to differentiate true risk spillovers from coincidental market noise,
+        achieving superior risk-adjusted performance during regime shifts.
+      </p>
+    </div>
+
+    <!-- ── Graph Topology ── -->
+    <div class="mt-8 w-full">
+      <h2 class="font-bold text-lg mb-3 text-gray-900">Graph Topology</h2>
+      <div class="fig-card">
+        <img src="assets/adjacency_matrices.png" alt="Adjacency matrices: GICS Sector vs Sub-Industry" class="fig-img" />
+        <p class="fig-caption">Adjacency matrices for the GICS Sector graph (541 edges, density 0.11) and the Sub-Industry graph (99 edges, density 0.02). Only the sector graph exceeds the density threshold required for clean Laplacian eigenvectors.</p>
+      </div>
+    </div>
+
+    <!-- ── Spectral Embeddings ── -->
+    <div class="mt-8 w-full">
+      <h2 class="font-bold text-lg mb-3 text-gray-900">Spectral Embeddings</h2>
+      <div class="fig-card">
+        <img src="assets/spectral_embedding.png" alt="Spectral embedding of sector graph" class="fig-img" />
+        <p class="fig-caption">Left: spectral embedding of the sector graph (Fiedler eigenvector vs. 2nd eigenvector), colored by GICS sector. Stocks in the same sector cluster together, validating that the Laplacian captures relational structure. Right: eigenvalue spectrum showing a clear spectral gap.</p>
+      </div>
+      <div class="fig-card mt-4">
+        <img src="assets/spectral_comparison.png" alt="v6 vs v8 spectral coordinates" class="fig-img" />
+        <p class="fig-caption">PCA of spectral coordinates for v6 (sector-only, 16 dims) vs. v8 (sector + supply chain, 16 dims total: 9 sector + 7 supply). Both models use M_SPECTRAL = 16; v8 splits the budget proportionally to spectral energy across both graphs. Late fusion preserves sector clustering while injecting supply-chain structure.</p>
+      </div>
+    </div>
+
+    <!-- ── Training Dynamics ── -->
+    <div class="mt-8 w-full">
+      <h2 class="font-bold text-lg mb-3 text-gray-900">Training Dynamics</h2>
+      <div class="fig-card">
+        <img src="assets/training_curves.png" alt="Training curves: loss, IC, and per-seed IC" class="fig-img" />
+        <p class="fig-caption">Left: MSE loss curves (log scale). Centre: Rank IC during training — WIRE and LSTM converge similarly, with high seed-to-seed variance. Right: test IC across all 5 seeds for LSTM vs WIRE, showing the variability that motivates multi-seed evaluation.</p>
+      </div>
+    </div>
+
+    <!-- ── Ablation Results ── -->
+    <div class="mt-8 w-full">
+      <h2 class="font-bold text-lg mb-2 text-gray-900">Ablation Study</h2>
+      <p class="text-sm text-gray-500 mb-3">3 configurations × 5 random seeds · paired t-tests</p>
+      <div class="fig-card">
+        <img src="assets/ablation_results.png" alt="Ablation: mean IC, per-seed IC, attention ratio" class="fig-img" />
+        <p class="fig-caption">Left: mean test Rank IC ± std for Baseline LSTM, v6 (Sector WIRE), and v8 (Sector + Supply WIRE) — all within the ±0.03 noise band; no pairwise difference is statistically significant (p > 0.49). Centre: per-seed breakdown showing high variance relative to mean. Right: attention ratio boxplot — v6 (sector) achieves ratio ≈ 0.96 (non-uniform), while v8 (sector + supply) is ≈ 1.01, indicating the additional supply-chain graph partially cancels the sector rotations at this data scale.</p>
+      </div>
+    </div>
+
+    <!-- ── Attention Analysis ── -->
+    <div class="mt-8 w-full">
+      <h2 class="font-bold text-lg mb-3 text-gray-900">Attention Analysis</h2>
+      <div class="fig-card">
+        <img src="assets/attention_analysis.png" alt="Attention heatmap and same vs different sector distribution" class="fig-img" />
+        <p class="fig-caption">Left: WIRE attention heatmap (Layer 2, Head 1) for the best seed — block structure aligns with GICS sectors. Right: density of attention weights for same-sector vs. different-sector pairs, confirming WIRE concentrates attention within sectors.</p>
+      </div>
+      <div class="fig-card mt-4">
+        <img src="assets/attention_comparison.png" alt="v6 vs v8 attention maps" class="fig-img" />
+        <p class="fig-caption">Attention maps for the best-seed v6 (sector-only) and v8 (sector + supply chain) models. The v8 map shows finer-grained structure from the additional supply-chain topology.</p>
+      </div>
+    </div>
+
+    <!-- ── Footer ── -->
+    <div class="mt-12 mb-4 text-xs text-gray-400 text-center">
+      STAT 3106 · Columbia University · March 2026
+    </div>
+
+  </div>
+</body>
+</html>
