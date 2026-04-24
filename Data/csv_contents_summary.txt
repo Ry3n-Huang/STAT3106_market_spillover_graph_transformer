@@ -1,0 +1,152 @@
+DATASET COLUMN SUMMARY REPORT
+========================================
+
+FILE: qf0egyr4ffi0pszj.csv
+----------------------------------------
+Total Columns found: 18
+Entries / Columns List:
+  - PERMNO  (Example: 10104)
+  - HdrCUSIP  (Example: 68389X10)
+  - Ticker  (Example: ORCL)
+  - PERMCO  (Example: 8045)
+  - DlyCalDt  (Example: 2015-01-02)
+  - DlyPrc  (Example: 44.33)
+  - DlyRet  (Example: -0.014232)
+  - DlyVol  (Example: 15070165)
+  - DlyLow  (Example: 43.97)
+  - DlyHigh  (Example: 45.1898)
+  - DlyBid  (Example: 44.33)
+  - DlyAsk  (Example: 44.34)
+  - DlyOpen  (Example: 45.02)
+  - ShrOut  (Example: 4391367)
+  - DisFacPr  (Example: nan)
+  - DisFacShr  (Example: nan)
+  - ewretx  (Example: 0.001432)
+  - sprtrn  (Example: -0.00034)
+
+**************************************************
+
+FILE: qdt7eopdzywsnimi.csv
+----------------------------------------
+Total Columns found: 42
+Entries / Columns List:
+  - INDNO  (Example: 1000500)
+  - MbrStartDt  (Example: 1989-08-03)
+  - MbrEndDt  (Example: 2025-12-31)
+  - PERMNO  (Example: 10104)
+  - HdrCUSIP  (Example: 68389X10)
+  - PERMCO  (Example: 8045)
+  - SICCD  (Example: 7379)
+  - CUSIP  (Example: 68389X10)
+  - Ticker  (Example: ORCL)
+  - ShareType  (Example: NS)
+  - SecurityType  (Example: EQTY)
+  - SecuritySubType  (Example: COM)
+  - USIncFlg  (Example: Y)
+  - IssuerType  (Example: CORP)
+  - PrimaryExch  (Example: N)
+  - ConditionalType  (Example: RW)
+  - TradingStatusFlg  (Example: A)
+  - DlyCalDt  (Example: 2015-01-02)
+  - DlyPrc  (Example: 44.33)
+  - DlyPrcFlg  (Example: TR)
+  - DlyCap  (Example: 194669299.11)
+  - DlyCapFlg  (Example: BP)
+  - DlyRet  (Example: -0.014232)
+  - DlyRetx  (Example: -0.014232)
+  - DlyRetMissFlg  (Example: nan)
+  - DlyRetDurFlg  (Example: D2)
+  - DlyOrdDivAmt  (Example: 0.0)
+  - DlyNonOrdDivAmt  (Example: 0.0)
+  - DlyFacPrc  (Example: 1.0)
+  - DlyDistRetFlg  (Example: NO)
+  - DlyVol  (Example: 15070165)
+  - DlyClose  (Example: 44.33)
+  - DlyLow  (Example: 43.97)
+  - DlyHigh  (Example: 45.1898)
+  - DlyBid  (Example: 44.33)
+  - DlyAsk  (Example: 44.34)
+  - DlyOpen  (Example: 45.02)
+  - DlyNumTrd  (Example: nan)
+  - DlyMMCnt  (Example: nan)
+  - DlyCumFacPr  (Example: 1.0)
+  - DlyCumFacShr  (Example: 1.0)
+  - ShrOut  (Example: 4391367)
+
+**************************************************
+
+FILE: gg3axrtvut5hi5hh.csv
+----------------------------------------
+Total Columns found: 19
+Entries / Columns List:
+  - GVKEY  (Example: 1045)
+  - LPERMNO  (Example: 21020)
+  - datadate  (Example: 2015-06-30)
+  - fyearq  (Example: 2015)
+  - fqtr  (Example: 2)
+  - indfmt  (Example: INDL)
+  - consol  (Example: C)
+  - popsrc  (Example: D)
+  - datafmt  (Example: STD)
+  - curcdq  (Example: USD)
+  - datacqtr  (Example: 2015Q2)
+  - datafqtr  (Example: 2015Q2)
+  - rdq  (Example: 2015-07-24)
+  - atq  (Example: 47868.0)
+  - ceqq  (Example: 3636.0)
+  - niq  (Example: 1704.0)
+  - costat  (Example: A)
+  - gsector  (Example: 20)
+  - gsubind  (Example: 20302010)
+
+**************************************************
+
+FILE: CRSP_S&P 500 Constituents.csv
+----------------------------------------
+Total Columns found: 42
+Entries / Columns List:
+  - INDNO  (Example: 1000500)
+  - MbrStartDt  (Example: 1989-08-03)
+  - MbrEndDt  (Example: 2025-12-31)
+  - PERMNO  (Example: 10104)
+  - HdrCUSIP  (Example: 68389X10)
+  - PERMCO  (Example: 8045)
+  - SICCD  (Example: 7379)
+  - CUSIP  (Example: 68389X10)
+  - Ticker  (Example: ORCL)
+  - ShareType  (Example: NS)
+  - SecurityType  (Example: EQTY)
+  - SecuritySubType  (Example: COM)
+  - USIncFlg  (Example: Y)
+  - IssuerType  (Example: CORP)
+  - PrimaryExch  (Example: N)
+  - ConditionalType  (Example: RW)
+  - TradingStatusFlg  (Example: A)
+  - DlyCalDt  (Example: 2015-01-02)
+  - DlyPrc  (Example: 44.33)
+  - DlyPrcFlg  (Example: TR)
+  - DlyCap  (Example: 194669299.11)
+  - DlyCapFlg  (Example: BP)
+  - DlyRet  (Example: -0.014232)
+  - DlyRetx  (Example: -0.014232)
+  - DlyRetMissFlg  (Example: nan)
+  - DlyRetDurFlg  (Example: D2)
+  - DlyOrdDivAmt  (Example: 0.0)
+  - DlyNonOrdDivAmt  (Example: 0.0)
+  - DlyFacPrc  (Example: 1.0)
+  - DlyDistRetFlg  (Example: NO)
+  - DlyVol  (Example: 15070165)
+  - DlyClose  (Example: 44.33)
+  - DlyLow  (Example: 43.97)
+  - DlyHigh  (Example: 45.1898)
+  - DlyBid  (Example: 44.33)
+  - DlyAsk  (Example: 44.34)
+  - DlyOpen  (Example: 45.02)
+  - DlyNumTrd  (Example: nan)
+  - DlyMMCnt  (Example: nan)
+  - DlyCumFacPr  (Example: 1.0)
+  - DlyCumFacShr  (Example: 1.0)
+  - ShrOut  (Example: 4391367)
+
+**************************************************
+
